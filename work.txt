@@ -1,0 +1,7 @@
+import 'dart:io';
+void main(){
+   print("Enter a sentence");
+   String sentance=stdin.readLineSync()!;
+    List<String> sentancelist=sentance.split(' ');
+    String text= sentancelist.join(" ");
+    print(text);
