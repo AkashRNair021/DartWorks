@@ -7,9 +7,9 @@ void main() {
      .then((b){
         return getData("count");
      })
-     .then{(c){
+     .then((c){
         print(c);
-     }};
+     });
  print("After printing");
 }
 
