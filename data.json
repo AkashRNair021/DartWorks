@@ -1,0 +1,23 @@
+[
+    {
+        "name": "Kuttussan",
+        "age": 30,
+        "occupation": "Software Engineer",
+        "address": "123 Main St",
+        "phone": "555-1234"
+    },
+    {
+        "name": "Dakini",
+        "age": 25,
+        "occupation": "Marketing Manager",
+        "address": "456 Elm St",
+        "phone": "555-5678"
+    },
+    {
+        "name": "Luttapi",
+        "age": 40,
+        "occupation": "Doctor",
+        "address": "789 Oak St",
+        "phone": "555-9012"
+    }
+]
