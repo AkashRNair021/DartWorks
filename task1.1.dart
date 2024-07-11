@@ -1,32 +1,87 @@
 import 'dart:io';
 
-Map<String, dynamic> createEmployee(String id, String name, int age, String department) {
-  return {
-    'id': id,
-    'name': name,
-    'age': age,
-    'department': department,
-  };
-}
-
-void saveEmployeeToFile(Map<String, dynamic> employee) {
-  final fileName = '${employee['id']}.txt';
-  final file = File(fileName);
-  final employeeJson = employee.toString();
-  file.writeAsStringSync(employeeJson);
-}
+List<Map<String, dynamic>> contacts = [];
 
 void main() {
-  Map<String, Map<String, dynamic>> employees = {};
+  int option = 0;
+  while (option!= 5) {
+    print("1.Add\n2.Display\n3.Edit\n4.Delete\n5.Quit");
+    option = int.parse(stdin.readLineSync()!);
+    switch (option) {
+      case 1:
+        add();
+        break;
+      case 2:
+        display();
+        break;
+      case 3:
+        edit();
+        break;
+      case 4:
+        deleteContact();
+        break;
+      case 5:
+        quit();
+        break;
+      default:
+        print("Invalid option");
+    }
+  }
+}
 
-  employees['E001'] = createEmployee('E001', 'John Doe', 30, 'IT');
-  employees['E002'] = createEmployee('E002', 'Jane Smith', 25, 'HR');
+void add() {
+  print("Enter name:");
+  String name = stdin.readLineSync()!;
+  print("Enter phone:");
+  String phone = stdin.readLineSync()!;
+  Map<String, dynamic> contact = {"name": name, "phone": phone};
+  contacts.add(contact);
+}
 
-  employees.forEach((id, employee) {
-    saveEmployeeToFile(employee);
+void display() {
+  if (contacts.isEmpty) {
+    print("No contacts to display.");
+    return;
+  }
+  contacts.forEach((e) {
+    print("${contacts.indexOf(e) + 1}. ${e["name"]}: ${e["phone"]}");
   });
+}
 
-  Map<String, dynamic> newEmployee = createEmployee('E003', 'Michael Johnson', 35, 'Marketing');
-  employees['E003'] = newEmployee;
-  saveEmployeeToFile(newEmployee);
+void edit() {
+  if (contacts.isEmpty) {
+    print("No contacts to edit.");
+    return;
+  }
+  display();
+  print("Enter the number of the contact to edit:");
+  int contactNumber = int.parse(stdin.readLineSync()!) - 1;
+  if (contactNumber < 0 || contactNumber >= contacts.length) {
+    print("Invalid contact number.");
+    return;
+  }
+  print("Enter new name:");
+  String newName = stdin.readLineSync()!;
+  print("Enter new phone:");
+  String newPhone = stdin.readLineSync()!;
+  contacts[contactNumber] = {"name": newName, "phone": newPhone};
+}
+
+void deleteContact() {
+  if (contacts.isEmpty) {
+    print("No contacts to delete.");
+    return;
+  }
+  display();
+  print("Enter the number of the contact to delete:");
+  int contactNumber = int.parse(stdin.readLineSync()!) - 1;
+  if (contactNumber < 0 || contactNumber >= contacts.length) {
+    print("Invalid contact number.");
+    return;
+  }
+  contacts.removeAt(contactNumber);
+}
+
+void quit() {
+  print("Goodbye!");
 }
